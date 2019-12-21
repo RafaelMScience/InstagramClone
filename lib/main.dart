@@ -8,14 +8,15 @@ import 'package:instagram_clone/screens/signup_screen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
-  Widget _getScreen(){
+  Widget _getScreen() {
     return StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (BuildContext context, snapshot){
-        if(snapshot.hasData){
-          return HomeScreen();
-        }else{
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.hasData) {
+          return HomeScreen(
+            userId: snapshot.data.uid,
+          );
+        } else {
           return LoginScreen();
         }
       },
@@ -28,12 +29,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Instagram Clone",
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+          color: Colors.black,
+        ),
+      ),
       home: _getScreen(),
       routes: {
-        LoginScreen.id:(context) => LoginScreen(),
-        SignupScreen.id:(context) => SignupScreen(),
-        FeedScreen.id:(context) => FeedScreen(),
-
+        LoginScreen.id: (context) => LoginScreen(),
+        SignupScreen.id: (context) => SignupScreen(),
+        FeedScreen.id: (context) => FeedScreen(),
       },
     );
   }

@@ -8,13 +8,15 @@ import 'package:instagram_clone/screens/search_screen.dart';
 import 'feed_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  final String userId;
+
+  HomeScreen({this.userId});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int _currentTab = 0;
   PageController _pageController;
 
@@ -29,16 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          "Instagram",
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Billabong',
-            fontSize: 35.0,
-          ),
-        )
-      ),
+          backgroundColor: Colors.white,
+          title: Text(
+            "Instagram",
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Billabong',
+              fontSize: 35.0,
+            ),
+          )),
       body: PageView(
         controller: _pageController,
         children: <Widget>[
@@ -46,40 +47,31 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchScreen(),
           CreatePostScreen(),
           ActivityScreen(),
-          ProfileScreen(),
-
+          ProfileScreen(userId: widget.userId),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
-        backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           currentIndex: _currentTab,
-          onTap: (int index){
+          onTap: (int index) {
             setState(() {
               _currentTab = index;
             });
             _pageController.animateToPage(
-                index,
-                duration: Duration(milliseconds: 200),
-                curve: Curves.easeIn,
+              index,
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeIn,
             );
           },
           activeColor: Colors.black,
-          items:[
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home, size: 32.0)),
+            BottomNavigationBarItem(icon: Icon(Icons.search, size: 32.0)),
+            BottomNavigationBarItem(icon: Icon(Icons.photo_camera, size: 32.0)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home,size: 32.0)
-            ),
+                icon: Icon(Icons.notifications, size: 32.0)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search,size: 32.0)
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.photo_camera,size: 32.0)
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications,size: 32.0)
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle,size: 32.0)
-            ),
+                icon: Icon(Icons.account_circle, size: 32.0)),
           ]),
     );
   }
