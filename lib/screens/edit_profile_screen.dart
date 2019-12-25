@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user_model.dart';
 import 'package:instagram_clone/services/database_service.dart';
+import 'package:instagram_clone/services/storage_service.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final User user;
@@ -36,11 +38,38 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  _submit() {
+  _displayProfileImage(){
+    // no new proflie image
+    if(_profileImage == null){
+      // no existing profile image
+      if(widget.user.profileImageUrl.isEmpty){
+        //Display placeholder
+        return AssetImage('assets/images/user_placholder.jpg');
+      }else{
+        // User profile image exists
+        return CachedNetworkImageProvider(widget.user.profileImageUrl);
+      }
+    }else{
+      //new profile image
+      return FileImage(_profileImage);
+    }
+  }
+
+  _submit() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       //Update user in database
       String _profilgeImageUrl = '';
+
+      if(_profileImage == null){
+        _profilgeImageUrl = widget.user.profileImageUrl;
+      }else{
+        _profilgeImageUrl = await StorageService.uploadUserProfileImage(
+          widget.user.profileImageUrl,
+          _profileImage,
+        );
+      }
+
       User user = User(
         id: widget.user.id,
         name: _name,
@@ -76,8 +105,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 60.0,
+                    backgroundColor: Colors.grey,
                     backgroundImage:
-                        NetworkImage('http://i.redd.ir/dmdqlcdjlwz.jpg'),
+                       _displayProfileImage(),
                   ),
                   FlatButton(
                     onPressed: _handleImageFromGallery,
