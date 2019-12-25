@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user_model.dart';
 import 'package:instagram_clone/services/database_service.dart';
 
@@ -13,14 +16,24 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+  File _profileImage;
   String _name = '';
   String _bio = '';
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _name = widget.user.name;
     _bio = widget.user.bio;
+  }
+
+  _handleImageFromGallery() async {
+    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if (imageFile != null) {
+      setState(() {
+        _profileImage = imageFile;
+      });
+    }
   }
 
   _submit() {
@@ -67,7 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         NetworkImage('http://i.redd.ir/dmdqlcdjlwz.jpg'),
                   ),
                   FlatButton(
-                    onPressed: () => print('Change profile'),
+                    onPressed: _handleImageFromGallery,
                     child: Text(
                       'Change Profile Image',
                       style: TextStyle(

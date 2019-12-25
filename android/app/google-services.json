@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "320600557079",
+    "firebase_url": "https://flutter-instagram-clone-f2743.firebaseio.com",
+    "project_id": "flutter-instagram-clone-f2743",
+    "storage_bucket": "flutter-instagram-clone-f2743.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320600557079:android:e36898420cad20a13fbe52",
+        "android_client_info": {
+          "package_name": "flutter.rafaelm.instagram_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320600557079-pgtjaep5noo5ufjo3cq8q0c3p00lipkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9yf7Xqf_jPTr--1itqfM9HJViSL7AVaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320600557079-pgtjaep5noo5ufjo3cq8q0c3p00lipkt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "320600557079-026dkesu2us1urkjuu78m16b84cf66mj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "flutter.rafaelm.instagramClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
