@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/services/auth_service.dart';
 
 class FeedScreen extends StatefulWidget {
 
@@ -12,6 +13,12 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
+      body: Center(
+        child: FlatButton(
+          onPressed: () => AuthService.logout(),
+          child: Text("Logout"),
+        ),
+      )
     );
   }
 }
