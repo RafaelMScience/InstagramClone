@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/models/user_date.dart';
 import 'package:instagram_clone/screens/activity_screen.dart';
 import 'package:instagram_clone/screens/create_post_screen.dart';
 import 'package:instagram_clone/screens/profile_screen.dart';
 import 'package:instagram_clone/screens/search_screen.dart';
+import 'package:provider/provider.dart';
 
 import 'feed_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String userId;
-
-  HomeScreen({this.userId});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchScreen(),
           CreatePostScreen(),
           ActivityScreen(),
-          ProfileScreen(userId: widget.userId),
+          ProfileScreen(userId: Provider.of<UserData>(context).currentUserId),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
