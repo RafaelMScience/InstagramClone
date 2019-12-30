@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -15,7 +16,23 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   _iosBottomSheet(){
-    print('ios');
+    showCupertinoModalPopup(
+      context: context,
+      builder: (BuildContext context){
+        return CupertinoActionSheet(
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              child: Text('Take Photo'),
+              onPressed: () => print('Camera'),
+            ),
+            CupertinoActionSheetAction(
+              child: Text('Choose From Gallery'),
+              onPressed: () => print('Gallery'),
+            )
+          ],
+        );
+      },
+    )
   }
 
   _androidDialog(){
