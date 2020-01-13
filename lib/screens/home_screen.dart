@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user_date.dart';
 import 'package:instagram_clone/screens/activity_screen.dart';
 import 'package:instagram_clone/screens/create_post_screen.dart';
+import 'package:instagram_clone/screens/feed_screen.dart';
 import 'package:instagram_clone/screens/profile_screen.dart';
 import 'package:instagram_clone/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'feed_screen.dart';
-
 class HomeScreen extends StatefulWidget {
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -21,58 +19,78 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
+    final String currentUserId = Provider.of<UserData>(context).currentUserId;
     return Scaffold(
-//      caso queria o AppBar em todas
-//      appBar: AppBar(
-//          backgroundColor: Colors.white,
-//          title: Text(
-//            "Instagram",
-//            style: TextStyle(
-//              color: Colors.black,
-//              fontFamily: 'Billabong',
-//              fontSize: 35.0,
-//            ),
-//          )),
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          FeedScreen(),
+          FeedScreen(currentUserId: currentUserId),
           SearchScreen(),
           CreatePostScreen(),
           ActivityScreen(),
-          ProfileScreen(userId: Provider.of<UserData>(context).currentUserId),
+          ProfileScreen(
+            currentUserId: currentUserId,
+            userId: currentUserId,
+          ),
         ],
+        onPageChanged: (int index) {
+          setState(() {
+            _currentTab = index;
+          });
+        },
       ),
       bottomNavigationBar: CupertinoTabBar(
-          backgroundColor: Colors.white,
-          currentIndex: _currentTab,
-          onTap: (int index) {
-            setState(() {
-              _currentTab = index;
-            });
-            _pageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeIn,
-            );
-          },
-          activeColor: Colors.black,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home, size: 32.0)),
-            BottomNavigationBarItem(icon: Icon(Icons.search, size: 32.0)),
-            BottomNavigationBarItem(icon: Icon(Icons.photo_camera, size: 32.0)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications, size: 32.0)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle, size: 32.0)),
-          ]),
+        currentIndex: _currentTab,
+        onTap: (int index) {
+          setState(() {
+            _currentTab = index;
+          });
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeIn,
+          );
+        },
+        activeColor: Colors.black,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 32.0,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              size: 32.0,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.photo_camera,
+              size: 32.0,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications,
+              size: 32.0,
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+              size: 32.0,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -11,8 +11,8 @@ class User {
     this.id,
     this.name,
     this.profileImageUrl,
-    this.bio,
     this.email,
+    this.bio,
   });
 
   factory User.fromDoc(DocumentSnapshot doc) {
