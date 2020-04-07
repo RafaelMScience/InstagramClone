@@ -1,14 +1,11 @@
 # Instagram Clone
 
-App Instagram Clone o app foi elaborado apenas para estudo onde foi clonado o app do Instagram e finalizado usando as tecnologia flutter foi finalizado tanto para IOS quanto para ANDROID e no back end foi usado Firebase para upload das imagens e profile.
-Foi desenvolvido no Android studio
+Instagram App Clone The app was created only for study where the Instagram app was cloned and finished using flutter technology, it was finished for both IOS and ANDROID and in the back end Firebase was used to upload images and profile. It was developed in Android studio
 
-TECNOLOGIAS USADAS:
+USED ​​TECHNOLOGIES:
 
- *FLutter
- *Dart
- *Firebase
- 
+- [FLutter] (https://flutter.dev/) 
+- [Firebase] (https://firebase.google.com/?hl=pt-br)
 
 ![](InstagramClone1.jpeg) ![](InstagramClone2.jpeg)
 
